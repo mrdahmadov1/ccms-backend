@@ -58,6 +58,11 @@ const complaintSchema = new Schema({
       ref: 'Response',
     },
   ],
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Complaint', complaintSchema);

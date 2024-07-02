@@ -17,6 +17,21 @@ exports.getAllComplaints = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMyComplaints = catchAsync(async (req, res, next) => {
+  const page = req.query.page || 1;
+  const limit = 10;
+
+  const complaints = await Complaint.find({ createdBy: req.user._id })
+    .limit(limit)
+    .skip((page - 1) * limit);
+
+  res.status(200).json({
+    status: 'success',
+    results: complaints.length,
+    data: complaints,
+  });
+});
+
 exports.getComplaint = catchAsync(async (req, res, next) => {
   let complaint = await Complaint.findById(req.params.id);
 
@@ -38,6 +53,7 @@ exports.getComplaint = catchAsync(async (req, res, next) => {
 });
 
 exports.createComplaint = catchAsync(async (req, res) => {
+  req.body.createdBy = req.user.id;
   const newComplaint = await Complaint.create(req.body);
 
   res.status(201).json({

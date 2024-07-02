@@ -6,9 +6,11 @@ const router = express.Router();
 
 router.use(authController.protect);
 
+router.get('/all', authController.restrictTo('admin'), complaintController.getAllComplaints);
+
 router
   .route('/')
-  .get(complaintController.getAllComplaints)
+  .get(authController.restrictTo('user'), complaintController.getMyComplaints)
   .post(authController.restrictTo('user'), complaintController.createComplaint);
 
 router
