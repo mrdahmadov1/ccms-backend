@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ResponseSchema = new Schema({
+const responseSchema = new Schema({
   complaintId: {
     type: Schema.Types.ObjectId,
     ref: 'Complaint',
@@ -25,4 +25,4 @@ const ResponseSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Response', ResponseSchema);
+module.exports = mongoose.model('Response', responseSchema);

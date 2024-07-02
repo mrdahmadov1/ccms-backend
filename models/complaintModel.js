@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ComplaintSchema = new Schema({
+const complaintSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -60,4 +60,4 @@ const ComplaintSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model('Complaint', ComplaintSchema);
+module.exports = mongoose.model('Complaint', complaintSchema);

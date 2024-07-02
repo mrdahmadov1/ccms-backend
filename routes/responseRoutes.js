@@ -1,10 +1,13 @@
 const express = require('express');
 const responseController = require('../controllers/responseController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.route('/').post(responseController.createResponse);
+router.use(authController.protect);
 
-router.route('/:id').patch(responseController.updateResponse);
+router.route('/').post(authController.restrictTo('admin'), responseController.createResponse);
+
+router.route('/:id').patch(authController.restrictTo('user'), responseController.updateResponse);
 
 module.exports = router;
