@@ -1,0 +1,19 @@
+{
+  "name": "ccms-backend",
+  "version": "1.0.0",
+  "description": "Customer Complaint Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrdahmadov1/ccms-backend.git"
+  },
+  "author": "Murad Ahmadov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrdahmadov1/ccms-backend/issues"
+  },
+  "homepage": "https://github.com/mrdahmadov1/ccms-backend#readme"
+}
