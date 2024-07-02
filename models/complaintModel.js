@@ -52,10 +52,12 @@ const ComplaintSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  adminResponse: {
-    type: Schema.Types.ObjectId,
-    ref: 'Response',
-  },
+  adminResponses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Response',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Complaint', ComplaintSchema);

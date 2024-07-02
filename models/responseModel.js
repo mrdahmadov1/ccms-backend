@@ -10,6 +10,14 @@ const ResponseSchema = new Schema({
   response: {
     type: String,
     required: true,
+    min: 10,
+    max: 500,
+  },
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    default: 0,
   },
   responseDate: {
     type: Date,
