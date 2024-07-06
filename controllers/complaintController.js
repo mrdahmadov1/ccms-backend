@@ -67,10 +67,10 @@ exports.updateComplaint = catchAsync(async (req, res, next) => {
 
   const updateFields = {};
   if (status) updateFields.status = status;
-  if (accepted !== undefined) updateFields.accepted = accepted;
+  if (priority) updateFields.priority = priority;
 
   if (Object.keys(updateFields).length === 0) {
-    return next(new AppError('Only status or accepted can be updated', 400));
+    return next(new AppError('Only status or priority can be updated', 400));
   }
 
   const updatedComplaint = await Complaint.findByIdAndUpdate(req.params.id, updateFields, {
