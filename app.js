@@ -13,7 +13,12 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://ccms-frontend.netlify.app',
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+  })
+);
 
 // Set security HTTP headers
 app.use(helmet());
