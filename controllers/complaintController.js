@@ -8,7 +8,11 @@ exports.getAllComplaints = catchAsync(async (req, res, next) => {
 
   const complaints = await Complaint.find()
     .limit(limit)
-    .skip((page - 1) * limit);
+    .skip((page - 1) * limit)
+    .populate({
+      path: 'adminResponses',
+      options: { sort: { responseDate: -1 } },
+    });
 
   res.status(200).json({
     status: 'success',
@@ -23,7 +27,11 @@ exports.getMyComplaints = catchAsync(async (req, res, next) => {
 
   const complaints = await Complaint.find({ createdBy: req.user._id })
     .limit(limit)
-    .skip((page - 1) * limit);
+    .skip((page - 1) * limit)
+    .populate({
+      path: 'adminResponses',
+      options: { sort: { responseDate: -1 } },
+    });
 
   res.status(200).json({
     status: 'success',
