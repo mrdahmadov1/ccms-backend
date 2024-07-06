@@ -23,7 +23,7 @@ exports.createResponse = catchAsync(async (req, res, next) => {
 exports.updateResponse = catchAsync(async (req, res, next) => {
   const { rating } = req.body;
 
-  if (!rating) {
+  if (rating === undefined) {
     return next(new AppError('Only rating can be updated', 400));
   }
 
