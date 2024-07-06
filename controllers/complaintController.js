@@ -11,7 +11,6 @@ exports.getAllComplaints = catchAsync(async (req, res, next) => {
     .skip((page - 1) * limit)
     .populate({
       path: 'adminResponses',
-      options: { sort: { responseDate: -1 } },
     });
 
   res.status(200).json({
@@ -30,7 +29,6 @@ exports.getMyComplaints = catchAsync(async (req, res, next) => {
     .skip((page - 1) * limit)
     .populate({
       path: 'adminResponses',
-      options: { sort: { responseDate: -1 } },
     });
 
   res.status(200).json({
@@ -50,7 +48,6 @@ exports.getComplaint = catchAsync(async (req, res, next) => {
   if (complaint.adminResponses && complaint.adminResponses.length > 0) {
     complaint = await Complaint.findById(req.params.id).populate({
       path: 'adminResponses',
-      options: { sort: { responseDate: -1 } },
     });
   }
 
