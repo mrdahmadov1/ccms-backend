@@ -63,7 +63,7 @@ exports.createComplaint = catchAsync(async (req, res) => {
 });
 
 exports.updateComplaint = catchAsync(async (req, res, next) => {
-  const { status, accepted } = req.body;
+  const { status, priority } = req.body;
 
   const updateFields = {};
   if (status) updateFields.status = status;
