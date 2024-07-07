@@ -15,7 +15,7 @@ app.enable('trust proxy');
 
 app.use(
   cors({
-    origin: 'https://ccms-frontend.netlify.app',
+    origin: ['https://ccms-frontend.netlify.app', 'http://localhost:5173'],
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })
 );
