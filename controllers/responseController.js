@@ -1,3 +1,4 @@
+const cron = require('node-cron');
 const Response = require('../models/responseModel');
 const Complaint = require('../models/complaintModel');
 const catchAsync = require('../utils/catchAsync');
@@ -41,4 +42,33 @@ exports.updateResponse = catchAsync(async (req, res, next) => {
     status: 'success',
     data: updatedResponse,
   });
+});
+
+cron.schedule('0 0 * * *', async () => {
+  const oneMinuteAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+  try {
+    const complaints = await Complaint.find({
+      status: 'Open',
+      submissionDate: { $lte: oneMinuteAgo },
+      adminResponses: { $size: 0 },
+    });
+
+    for (const complaint of complaints) {
+      const autoResponse = {
+        complaintId: complaint._id,
+        response: 'Your complaint is received and is being reviewed.',
+        rating: 0,
+      };
+
+      const newResponse = await Response.create(autoResponse);
+
+      complaint.adminResponses.push(newResponse._id);
+      await complaint.save();
+    }
+
+    // console.log('Auto-responses sent for unresolved complaints.');
+  } catch (err) {
+    // console.error('Error in auto-response cron job:', err);
+  }
 });
