@@ -3,9 +3,11 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getAllComplaints = catchAsync(async (req, res, next) => {
-  const complaints = await Complaint.find().populate({
-    path: 'adminResponses',
-  });
+  const complaints = await Complaint.find()
+    .populate({
+      path: 'adminResponses',
+    })
+    .sort({ submissionDate: -1 });
 
   res.status(200).json({
     status: 'success',
@@ -15,9 +17,11 @@ exports.getAllComplaints = catchAsync(async (req, res, next) => {
 });
 
 exports.getMyComplaints = catchAsync(async (req, res, next) => {
-  const complaints = await Complaint.find({ createdBy: req.user._id }).populate({
-    path: 'adminResponses',
-  });
+  const complaints = await Complaint.find({ createdBy: req.user._id })
+    .populate({
+      path: 'adminResponses',
+    })
+    .sort({ submissionDate: -1 });
 
   res.status(200).json({
     status: 'success',
